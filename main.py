@@ -8,7 +8,7 @@ from colorama import Fore
 sc = nmap.PortScanner() 
 
 print(Fore.RED("""
- ▄▄▄      ▒███████▒ ▒█████  ▄▄▄█████▓ ██░ ██ \n
+      ▄▄▄      ▒███████▒ ▒█████  ▄▄▄█████▓ ██░ ██ \n
 ▒████▄    ▒ ▒ ▒ ▄▀░▒██▒  ██▒▓  ██▒ ▓▒▓██░ ██▒\n
 ▒██  ▀█▄  ░ ▒ ▄▀▒░ ▒██░  ██▒▒ ▓██░ ▒░▒██▀▀██░\n
 ░██▄▄▄▄██   ▄▀▒   ░▒██   ██░░ ▓██▓ ░ ░▓█ ░██ \n
@@ -28,8 +28,10 @@ def main():
     if n == "3":
         os.system("msfconsole")
     if n == "0":
-        else :
-        print('\nChoisissez un nombre entre 1 et 4 (4 = 0)')
+        info()
+    
+    else :
+        print("\nChoisissez un nombre entre 1 et 4 (4 = 0)")
 
 def nmap():
     print(Fore.GREEN("""
@@ -81,3 +83,5 @@ copyright = "Copyright (c) Azxth 'LICENSE'"
 
 if __name__ == "__main__":
     main()
+
+
