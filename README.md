@@ -54,8 +54,8 @@ Azoth has been developed solely for educational purposes. This project has been 
 
 <h2>🔗・Credits:</h2>
 <p>
-- <a href="https://discord.gg/redtigertools">Discord</a><br>
-- <a href="https://redtiger.shop">Website</a><br>
-- Creator: Loxyteck<br>
+- <a href="https://discord.gg/soon...">Discord</a><br>
+- <a href="soon...">Website</a><br>
+- Creator: 000-DarkStar<br>
 - Version: 5.6
 </p>
