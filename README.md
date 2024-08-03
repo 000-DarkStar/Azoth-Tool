@@ -1,4 +1,4 @@
-<h1 align="center">NEW DISCORD SERVER: https://discord.gg/redtigertools</h1> 
+<h1 align="center">soon..</h1> 
 <h1 align="center"><img src="azoth.png" width="40px"> Azoth Multi-Tool <img src="azoth.png" width="40px"></h1> 
 <p align="center">
   <img src="https://img.shields.io/github/languages/top/fluzyteck/RedTiger-Tools?color=a80505">
