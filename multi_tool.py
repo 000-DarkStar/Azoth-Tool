@@ -1,14 +1,51 @@
 #!usr/bin/python3
 #pip3 install python-nmap
-
-import nmap
-import os
+import sqlite3
+import os 
 from colorama import Fore
+import colorama
+import nmap
 
-sc = nmap.PortScanner() 
 
-print(Fore.RED("""
-      ▄▄▄      ▒███████▒ ▒█████  ▄▄▄█████▓ ██░ ██ \n
+
+# Création ou connexion à la base de données SQLite
+conn = sqlite3.connect('users.db')
+c = conn.cursor()
+
+# Création de la table des utilisateurs si elle n'existe pas
+c.execute('''
+CREATE TABLE IF NOT EXISTS users (
+    username TEXT PRIMARY KEY
+)
+''')
+
+# Fonction pour ajouter un nouvel utilisateur
+def create_user():
+    username = input("Veuillez entrer un nom d'utilisateur: ")
+    try:
+        c.execute('INSERT INTO users (username) VALUES (?)', (username,))
+        conn.commit()
+        print("Utilisateur ajouté avec succès.")
+    except sqlite3.IntegrityError:
+        print("Ce nom d'utilisateur existe déjà.")
+
+# Fonction pour vérifier l'utilisateur et se connecter
+def login():
+    username = input("Veuillez entrer votre nom d'utilisateur pour vous connecter: ")
+    c.execute('SELECT * FROM users WHERE username = ?', (username,))
+    user = c.fetchone()
+    if user:
+        print(f"Bienvenue, {username}!")
+        tool_menu()
+    else:
+        print("Nom d'utilisateur non trouvé. Accès refusé.")
+
+# Menu principal des outils
+def tool_menu():
+    print("Vous êtes maintenant connecté à l'outil.")
+    while True:
+        print(Fore.LIGHTBLUE_EX + '''
+ ▄▄▄      ▒███████▒ ▒█████  ▄▄▄█████▓ ██░ ██ \n
 ▒████▄    ▒ ▒ ▒ ▄▀░▒██▒  ██▒▓  ██▒ ▓▒▓██░ ██▒\n
 ▒██  ▀█▄  ░ ▒ ▄▀▒░ ▒██░  ██▒▒ ▓██░ ▒░▒██▀▀██░\n
 ░██▄▄▄▄██   ▄▀▒   ░▒██   ██░░ ▓██▓ ░ ░▓█ ░██ \n
@@ -17,24 +54,47 @@ print(Fore.RED("""
   ▒   ▒▒ ░░░▒ ▒ ░ ▒  ░ ▒ ▒░     ░     ▒ ░▒░ ░\n
   ░   ▒   ░ ░ ░ ░ ░░ ░ ░ ▒    ░       ░  ░░ ░\n
       ░  ░  ░ ░        ░ ░            ░  ░  ░\n
-          ░                                   """))
+          ░                                   ''')
+        def tool():
+            n = input("1-Scanner Résaux\n2-Detection Vulnerabilité\n3- Exploit\n0- Info tool")
+            if n == "1":
+                nmap()
+            if n == "2":
+                vuln()
+            if n == "3":
+                os.system("msfconsole")
+            if n == "0":
+                info()
+            else :
+                print("\nChoisissez un nombre entre 1 et 4 (4 = 0)")
 
-def main():
-    n = input("1-Scanner Résaux\n2-Detection Vulnerabilité\n3- Exploit\n0- Info tool")
-    if n == "1":
-        nmap()
-    if n == "2":
-        vuln()
-    if n == "3":
-        os.system("msfconsole")
-    if n == "0":
-        info()
-    
-    else :
-        print("\nChoisissez un nombre entre 1 et 4 (4 = 0)")
+# Menu principal
+def menu_principale():
+    while True:
+        print(Fore.RED + '''
+ ▄▄▄      ▒███████▒ ▒█████  ▄▄▄█████▓ ██░ ██ 
+▒████▄    ▒ ▒ ▒ ▄▀░▒██▒  ██▒▓  ██▒ ▓▒▓██░ ██▒
+▒██  ▀█▄  ░ ▒ ▄▀▒░ ▒██░  ██▒▒ ▓██░ ▒░▒██▀▀██░
+░██▄▄▄▄██   ▄▀▒   ░▒██   ██░░ ▓██▓ ░ ░▓█ ░██ 
+ ▓█   ▓██▒▒███████▒░ ████▓▒░  ▒██▒ ░ ░▓█▒░██▓
+ ▒▒   ▓▒█░░▒▒ ▓░▒░▒░ ▒░▒░▒░   ▒ ░░    ▒ ░░▒░▒
+  ▒   ▒▒ ░░░▒ ▒ ░ ▒  ░ ▒ ▒░     ░     ▒ ░▒░ ░
+  ░   ▒   ░ ░ ░ ░ ░░ ░ ░ ▒    ░       ░  ░░ ░
+      ░  ░  ░ ░        ░ ░            ░  ░  ░
+          ░                                   ''')
+        choice = input("Choisissez une option:\n1. Créer un utilisateur\n2. Se connecter\n0. Quitter")
+        if choice == '1':
+            create_user()
+        elif choice == '2':
+            login()
+        elif choice == '0':
+            print("Au revoir!")
+            break
+        else:
+            print("Option invalide, veuillez réessayer.")
 
 def nmap():
-    print(Fore.GREEN("""
+    print(Fore.GREEN + """
 ███╗   ██╗███████╗████████╗██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗    ███████╗ ██████╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗ 
 ████╗  ██║██╔════╝╚══██╔══╝██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗
 ██╔██╗ ██║█████╗     ██║   ██║ █╗ ██║██║   ██║██████╔╝█████╔╝     ███████╗██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
@@ -42,14 +102,15 @@ def nmap():
 ██║ ╚████║███████╗   ██║   ╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗    ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║
 ╚═╝  ╚═══╝╚══════╝   ╚═╝    ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
                                         Bienvenue dans le Scanner résaux
-          """))
+          """)
+    # TypeError: 'str' object is not callable
     ip = input('PLease enter the Ip address')
     sc.scan(ip , '1-1024')
     print(sc.scaninfo())
     print(sc[ip]['tcp'].keys())
 
 def vuln():
-    print(Fore.CYAN("""
+    print(Fore.CYAN + """
 ██╗   ██╗██╗   ██╗██╗     ███╗   ██╗███████╗██████╗  █████╗ ██████╗ ██╗██╗     ██╗████████╗██╗███████╗███████╗\n
 ██║   ██║██║   ██║██║     ████╗  ██║██╔════╝██╔══██╗██╔══██╗██╔══██╗██║██║     ██║╚══██╔══╝██║██╔════╝██╔════╝\n
 ██║   ██║██║   ██║██║     ██╔██╗ ██║█████╗  ██████╔╝███████║██████╔╝██║██║     ██║   ██║   ██║█████╗  ███████╗\n
@@ -63,25 +124,40 @@ def vuln():
         ██║  ██║██╔══╝     ██║   ██╔══╝  ██║        ██║   ██║██║   ██║██║╚██╗██║\n
         ██████╔╝███████╗   ██║   ███████╗╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║\n
         ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝\n
-"""))
+""")
+    # TypeError: 'str' object is not callable
     ip = input("\nVeuiller entré l'addresse Ip")
     print(os.system('nmap -sV --script=vulcan.nse' +ip ))
 
 def info():
-    print("""
+    print('''
 name_tool = "Azoth"
 version_tool = "1.1"
 coding_tool = "Python 3"
 language_tool = "EN"
-creator = "Azoth"
+creator = "LEo"
 platform = "Windows 10/11 & Linux"
 website = "soon.."
 github_tool = "soon.."
 license = "https://github.com/loxyteck/RedTiger-Tools/blob/main/LICENSE"
 copyright = "Copyright (c) Azxth 'LICENSE'"
-          """)
+          ''')
+
+
+    # Création ou connexion à la base de données SQLite
+conn = sqlite3.connect('users.db')
+c = conn.cursor()
+
+# Création de la table des utilisateurs si elle n'existe pas
+c.execute('''
+CREATE TABLE IF NOT EXISTS users (
+    username TEXT PRIMARY KEY
+)
+''')
 
 if __name__ == "__main__":
-    main()
+    create_user()
 
+# Fermeture de la connexion à la base de données
+conn.close()
 
