@@ -40,15 +40,11 @@
 - Linux recent version.
 </p>
 
-<h1>⏳・Installation:</h1>
-<a href="https://github.com/fluzyteck/RedTiger/archive/main.zip">Dowloads Tools Here</a>
-<p>
-  
 ```
 Or
 ```
 1 - Open a terminal.
-2 - Write "git clone https://github.com/loxyteck/RedTiger-Tools.git"
+2 - Write "git clone https://github.com/000-DarkStar/Azoth-Tool.git"
 3 - Write "cd Azoth-Tool"
 4 - Write "python multi_tools.py"
 
