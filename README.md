@@ -51,11 +51,8 @@ Or
 2 - Write "git clone https://github.com/loxyteck/RedTiger-Tools.git"
 3 - Write "cd Azoth-Tool"
 4 - Write "python multi_tools.py"
-```
-</p>
 
-<h1>☠️・Builder:</h1>
-<img align="center" src="Img/Builder.png" width="800px">
+</p>
 
 <h1>⚠️・Terms of use:</h1>
 <p>
