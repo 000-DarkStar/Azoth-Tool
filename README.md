@@ -1,5 +1,5 @@
 <h1 align="center">NEW DISCORD SERVER: https://discord.gg/redtigertools</h1> 
-<h1 align="center"><img src="azoth.png" width="40px"> RedTiger Multi-Tool <img src="Img/azoth.png" width="40px"></h1> 
+<h1 align="center"><img src="azoth.png" width="40px"> Azoth Multi-Tool <img src="azoth.png" width="40px"></h1> 
 <p align="center">
   <img src="https://img.shields.io/github/v/release/fluzyteck/RedTiger-Tools?label=Version&color=a80505">
   <img src="https://img.shields.io/github/stars/fluzyteck/RedTiger-tools?style=flat&label=Stars&color=a80505">
@@ -9,8 +9,7 @@
 </p>
 <img align="center" src="Img/RedTiger.png" width="99999px">
 <p>
-<strong>All scripts in the "<a href="https://github.com/loxyteck/RedTiger-Tools/tree/main/Settings/Program/FileDetectedByAntivirus">Settings/Program/FileDetectedByAntivirus</a>" folder are detected by the antivirus but pose no threat to you. These are not backdoors or malware.</strong>
-
+  
 <h3>⭐ Don't forget to set the repository to "Star" !! ⬆️</h3>
 </p>
 <h1>📜・Description:</h1>
@@ -25,7 +24,6 @@
 💰 -> <strong>Free</strong> for everyone.<br>
 </p>
   
-```
 </p>
 
 <h1>🔒・Requirements:</h1>
