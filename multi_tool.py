@@ -7,12 +7,14 @@ from colorama import Fore
 import colorama
 import nmap
 import time
+import requests
+from bs4 import BeautifulSoup
 
-
-sc = nmap.PortScanner()
 # Création ou connexion à la base de données SQLite
 conn = sqlite3.connect('users.db')
 c = conn.cursor()
+
+sc = nmap.PortScanner()
 
 # Création de la table des utilisateurs si elle n'existe pas
 c.execute('''
@@ -129,20 +131,25 @@ def vuln():
         ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝\n
 """)
     # TypeError: 'str' object is not callable
-    ip = input("\nVeuiller entré l'addresse Ip")
-    print(os.system('nmap -sV --script=vulcan.nse' +ip ))
+    
+    ul = input("\n [1] Scan WebSite\n[2] Scan Ip")
+    if ul == '1':
+        url()
+    if ul == '2':
+        ip = input("\nVeuiller entré l'addresse Ip")
+    print(os.system('nmap -sV --script=vulscan.nse' +ip ))
 
 def info():
     print('''
 name_tool = "Azoth"
-version_tool = "1.1"
+version_tool = "1.5"
 coding_tool = "Python 3"
-language_tool = "EN"
-creator = "000-Darkstar"
+language_tool = "EN/FR"
+creator = "000-DarkStar"
 platform = "Windows 10/11 & Linux"
 website = "soon.."
 github_tool = "soon.."
-license = "https://github.com/000-DarkStar/Azoth-Tool/LICENSE"
+license = "https://github.com/loxyteck/RedTiger-Tools/blob/main/LICENSE"
 copyright = "Copyright (c) Azxth 'LICENSE'"
           ''')
     timeout=5
@@ -178,6 +185,39 @@ def main():
         else:
             print("Option invalide, veuillez réessayer.")
 
+def check_xss(url):
+    test_script = "<script>alert('XSS')</script>"
+    response = requests.get(url + test_script)
+    if test_script in response.text:
+        print(f"[VULNERABLE] XSS vulnerability detected at {url}")
+    else:
+        print(f"[SAFE] No XSS vulnerability at {url}")
+
+def check_sql_injection(url):
+    test_payload = "' OR '1'='1"
+    response = requests.get(url + test_payload)
+    if "syntax" in response.text or "SQL" in response.text:
+        print(f"[VULNERABLE] SQL Injection vulnerability detected at {url}")
+    else:
+        print(f"[SAFE] No SQL Injection vulnerability at {url}")
+
+def check_file_inclusion(url):
+    test_payload = "../../../../etc/passwd"
+    response = requests.get(url + test_payload)
+    if "root:x" in response.text:
+        print(f"[VULNERABLE] File Inclusion vulnerability detected at {url}")
+    else:
+        print(f"[SAFE] No File Inclusion vulnerability at {url}")
+
+def scan_site(url):
+    print(f"Scanning {url} for vulnerabilities...")
+    check_xss(url)
+    check_sql_injection(url)
+    check_file_inclusion(url)
+
+def url():
+    target_url = input("Enter the URL of the site to scan: ")
+    scan_site(target_url)
 
 if __name__ == "__main__":
     main()
