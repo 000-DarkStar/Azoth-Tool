@@ -8,6 +8,8 @@ import colorama
 import nmap
 import time
 
+
+sc = nmap.PortScanner()
 # Création ou connexion à la base de données SQLite
 conn = sqlite3.connect('users.db')
 c = conn.cursor()
