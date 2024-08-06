@@ -43,9 +43,10 @@ def login():
         tool_menu()
         time.sleep(2)
     if os.name == 'nt':  # Pour Windows
-        os.system('cls || clear')
+        os.system('cls')
     else:
         print("Nom d'utilisateur non trouvé. Accès refusé.")
+        time.sleep(3)
         
 # Menu principal des outils
 def tool_menu():
