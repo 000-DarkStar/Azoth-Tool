@@ -24,11 +24,7 @@
 </p>
 
 <h1>🔒・Requirements:</h1>
-<h3>Windows:</h3>
-<p>
-- Install <a href="https://www.python.org/downloads/">Python</a> with the <a href="Img/Python_Path.png">PATH</a> options.<br>
-- Install <a href="https://www.win-rar.com/postdownload.html?&L=10">Winrar</a>.<br>
-- Windows 10 & 11
+
 </p>
 <h3>Linux:</h3>
 <p>
