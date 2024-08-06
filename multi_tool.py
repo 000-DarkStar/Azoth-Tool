@@ -137,7 +137,7 @@ def vuln():
         url()
     if ul == '2':
         ip = input("\nVeuiller entré l'addresse Ip")
-    print(os.system('nmap -sV --script=vulscan.nse' +ip ))
+        print(os.system('nmap -sV --script=vulscan.nse' +ip ))
 
 def info():
     print('''
