@@ -1,0 +1,2 @@
+python atoth.py
+pause
