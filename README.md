@@ -14,7 +14,7 @@
   
 👨‍💻 -> Developed in <strong>Python</strong>.<br>
 🌍 -> Tool in <strong>English</strong>.<br>
-💻 -> Available on <strong>Linux</strong>.<br>
+💻 ->  Only available on <strong>Linux</strong>.<br>
 🔎 -> <strong>No malware</strong> or <strong>backdoor</strong>.<br>
 📂 -> <strong>Open Source</strong> only for verification, ensuring no malicious programs.<br>
 🔄 -> <strong>Frequently updated</strong>.<br>
@@ -45,7 +45,7 @@ Or
 
 <h1>⚠️・Terms of use:</h1>
 <p>
-Azoth has been developed solely for educational purposes. This project has been created with good intentions and is intended for personal use only. By choosing to use RedTiger, you acknowledge and accept full responsibility for any consequences that may result from your actions.
+Azoth has been developed solely for educational purposes. This project has been created with good intentions and is intended for personal use only. By choosing to use Azoth tools, you acknowledge and accept full responsibility for any consequences that may result from your actions.
 </p>
 
 <h2>🔗・Credits:</h2>
