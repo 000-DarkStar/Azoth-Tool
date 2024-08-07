@@ -1,0 +1,8 @@
+sqlite3
+os 
+Fore
+colorama
+time
+requests
+bs4
+BeautifulSoup
