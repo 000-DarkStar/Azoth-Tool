@@ -185,7 +185,7 @@ creator = "000-DarkStar"
 platform = "Windows 10/11 & Linux"
 website = "soon.."
 github_tool = "https://github.com/000-DarkStar/Azoth-Tool/edit/main/multi_tool.py"
-license = "https://github.com/loxyteck/RedTiger-Tools/blob/main/LICENSE"
+license = "https://github.com/000-DarkStar/Azoth-Tool/blob/main/LICENSE"
 copyright = "Copyright (c) Azxth 'LICENSE'"
           ''')
     time.sleep(13)
