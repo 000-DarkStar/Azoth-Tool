@@ -5,16 +5,17 @@ import sqlite3
 import os 
 from colorama import Fore
 import colorama
-import nmap
 import time
 import requests
 from bs4 import BeautifulSoup
+import nmap
 
 # Création ou connexion à la base de données SQLite
 conn = sqlite3.connect('users.db')
 c = conn.cursor()
 
-sc = nmap.PortScanner()
+
+sc = nmap.PortScanner
 
 # Création de la table des utilisateurs si elle n'existe pas
 c.execute('''
@@ -30,8 +31,10 @@ def create_user():
         c.execute('INSERT INTO users (username) VALUES (?)', (username,))
         conn.commit()
         print("Utilisateur ajouté avec succès.")
+        menu_principale()
     except sqlite3.IntegrityError:
         print("Ce nom d'utilisateur existe déjà.")
+        menu_principale()
 
 # Fonction pour vérifier l'utilisateur et se connecter
 def login():
@@ -42,28 +45,24 @@ def login():
         print(f"Bienvenue, {username}!")
         tool_menu()
         time.sleep(2)
-    if os.name == 'nt':  # Pour Windows
-        os.system('cls')
+
     else:
         print("Nom d'utilisateur non trouvé. Accès refusé.")
         time.sleep(3)
+        exit()
         
 # Menu principal des outils
 def tool_menu():
-    print("Vous êtes maintenant connecté à l'outil.")
+    print("Vous êtes maintenant connecté à azoth.")
     print(Fore.BLUE + '''
- ▄▄▄      ▒███████▒ ▒█████  ▄▄▄█████▓ ██░ ██ 
-▒████▄    ▒ ▒ ▒ ▄▀░▒██▒  ██▒▓  ██▒ ▓▒▓██░ ██▒  [!] Info tool
-▒██  ▀█▄  ░ ▒ ▄▀▒░ ▒██░  ██▒▒ ▓██░ ▒░▒██▀▀██░
-░██▄▄▄▄██   ▄▀▒   ░▒██   ██░░ ▓██▓ ░ ░▓█ ░██ 
- ▓█   ▓██▒▒███████▒░ ████▓▒░  ▒██▒ ░ ░▓█▒░██▓
- ▒▒   ▓▒█░░▒▒ ▓░▒░▒░ ▒░▒░▒░   ▒ ░░    ▒ ░░▒░▒
-  ▒   ▒▒ ░░░▒ ▒ ░ ▒  ░ ▒ ▒░     ░     ▒ ░▒░ ░
-  ░   ▒   ░ ░ ░ ░ ░░ ░ ░ ▒    ░       ░  ░░ ░
-      ░  ░  ░ ░        ░ ░            ░  ░  ░
-          ░                                   ''')
-    print("Choissisez une option ci-dessous")
-    n = input("1-Scanner Résaux\n2-Detection Vulnerabilité\n3- Exploit")
+           _____                        __    .__            [!] INFO TOOLS 
+          /  _  \   ________   ____   _/  |_  |  |__          
+         /  /_\  \  \___   /  /  _ \  \   __\ |  |  \         
+        /    |    \  /    /  (  <_> )  |  |   |   Y  \        
+        \____|__  / /_____ \  \____/   |__|   |___|  /        
+                \/        \/                       \/         
+        ''')
+    n = input("1-Scanner Résaux\n2-Detection Vulnerabilité\n3- Exploit\nChoissisez une option: ")
     if n == "1":
         nmap()
     if n == "2":
@@ -74,73 +73,109 @@ def tool_menu():
         info()
     else :
         print("\nChoisissez un nombre entre 1 et 4 (4 = 0)")
+        time.sleep(1.5)
+    if os.name == 'nt':  # Pour Windows
+        os.system('cls')
+
+    else :  # Pour Linux/Mac
+        os.system('clear')
 
 # Menu principal
 def menu_principale():
     print(Fore.RED + '''
- ▄▄▄      ▒███████▒ ▒█████  ▄▄▄█████▓ ██░ ██ 
-▒████▄    ▒ ▒ ▒ ▄▀░▒██▒  ██▒▓  ██▒ ▓▒▓██░ ██▒
-▒██  ▀█▄  ░ ▒ ▄▀▒░ ▒██░  ██▒▒ ▓██░ ▒░▒██▀▀██░
-░██▄▄▄▄██   ▄▀▒   ░▒██   ██░░ ▓██▓ ░ ░▓█ ░██ 
- ▓█   ▓██▒▒███████▒░ ████▓▒░  ▒██▒ ░ ░▓█▒░██▓
- ▒▒   ▓▒█░░▒▒ ▓░▒░▒░ ▒░▒░▒░   ▒ ░░    ▒ ░░▒░▒
-  ▒   ▒▒ ░░░▒ ▒ ░ ▒  ░ ▒ ▒░     ░     ▒ ░▒░ ░
-  ░   ▒   ░ ░ ░ ░ ░░ ░ ░ ▒    ░       ░  ░░ ░
-      ░  ░  ░ ░        ░ ░            ░  ░  ░
-          ░                                   ''')
-    b = input("Choisissez une option:\n1. Créer un utilisateur\n2. Se connecter\n0. Quitter")
+                                  )      )                )     
+                       (       ( /(   ( /(     *   )   ( /(     V1.1
+                       )\      )\())  )\())  ` )  /(   )\())    
+                    ((((_)(   ((_)\  ((_)\    ( )(_)) ((_)\     
+                     )\ _ )\   _((_)   ((_)  (_(_())   _((_)    
+                     (_)_\(_) |_  /   / _ \  |_   _|  | || |    
+                      / _ \    / /   | (_) |   | |    | __ |    
+                     /_/ \_\  /___|   \___/    |_|    |_||_|    
+                                             ''')
+    b = input("\n1. Créer un utilisateur\n2. Se connecter\n0. Quitter\nChoose un number:")
     if b == '1':
         create_user()
     elif b == '2':
         login()
     elif b == '0':
         print("Au revoir!")
+        time.sleep(1.3)
         exit()
     else:
-            print("Option invalide, veuillez réessayer.")
+        print("Option invalide, veuillez réessayer.")
 
 def nmap():
+    if os.name == 'nt':  # Pour Windows
+        os.system('cls')
+
+    else :  # Pour Linux/Mac
+        os.system('clear')
     print(Fore.GREEN + """
-███╗   ██╗███████╗████████╗██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗    ███████╗ ██████╗ █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗ 
-████╗  ██║██╔════╝╚══██╔══╝██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗
-██╔██╗ ██║█████╗     ██║   ██║ █╗ ██║██║   ██║██████╔╝█████╔╝     ███████╗██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝
-██║╚██╗██║██╔══╝     ██║   ██║███╗██║██║   ██║██╔══██╗██╔═██╗     ╚════██║██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗
-██║ ╚████║███████╗   ██║   ╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗    ███████║╚██████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║
-╚═╝  ╚═══╝╚══════╝   ╚═╝    ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝
-                                        Bienvenue dans le Scanner résaux
+            ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
+            ▐                  __                             __     ▌
+            ▐  ____    ____  _/  |_ __  _  __  ____  _______ |  | __ ▌
+            ▐ /    \ _/ __ \ \   __\\ \/ \/ / /  _ \ \_  __ \|  |/ / ▌
+            ▐|   |  \\  ___/  |  |   \     / (  <_> ) |  | \/|    <  ▌
+            ▐|___|  / \___  > |__|    \/\_/   \____/  |__|   |__|_ \ ▌
+            ▐     \/      \/                                      \/ ▌
+            ▐                                                        ▌
+            ▐    _____   _____ _____     ____                        ▌
+            ▐   /  ___/_/ ___\ \__  \   /    \                       ▌
+            ▐   \___ \ \  \___  / __ \_|   |  \                      ▌
+            ▐  /____  > \___  >(____  /|___|  /                      ▌
+            ▐       \/      \/      \/      \/                       ▌
+            ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
+                       ╔═════════════════╗
+                       ║  Network Scan   ║ V1.1
+                       ╚═════════════════╝                 
           """)
     # TypeError: 'str' object is not callable
-    ip = input('PLease enter the Ip address')
+    ip = input('Please enter the Ip address')
     sc.scan(ip , '1-1024')
     print(sc.scaninfo())
     print(sc[ip]['tcp'].keys())
 
 def vuln():
-    print(Fore.CYAN + """
-██╗   ██╗██╗   ██╗██╗     ███╗   ██╗███████╗██████╗  █████╗ ██████╗ ██╗██╗     ██╗████████╗██╗███████╗███████╗\n
-██║   ██║██║   ██║██║     ████╗  ██║██╔════╝██╔══██╗██╔══██╗██╔══██╗██║██║     ██║╚══██╔══╝██║██╔════╝██╔════╝\n
-██║   ██║██║   ██║██║     ██╔██╗ ██║█████╗  ██████╔╝███████║██████╔╝██║██║     ██║   ██║   ██║█████╗  ███████╗\n
-╚██╗ ██╔╝██║   ██║██║     ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║██╔══██╗██║██║     ██║   ██║   ██║██╔══╝  ╚════██║\n
- ╚████╔╝ ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║██████╔╝██║███████╗██║   ██║   ██║███████╗███████║\n
-  ╚═══╝   ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝╚══════╝╚═╝   ╚═╝   ╚═╝╚══════╝╚══════╝\n
-                                                                                                              
-        ██████╗ ███████╗████████╗███████╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗\n
-        ██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║\n
-        ██║  ██║█████╗     ██║   █████╗  ██║        ██║   ██║██║   ██║██╔██╗ ██║\n
-        ██║  ██║██╔══╝     ██║   ██╔══╝  ██║        ██║   ██║██║   ██║██║╚██╗██║\n
-        ██████╔╝███████╗   ██║   ███████╗╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║\n
-        ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝\n
-""")
+    if os.name == 'nt':  # Pour Windows
+        os.system('cls')
+
+    else :  # Pour Linux/Mac
+        os.system('clear')
+    print(Fore.LIGHTMAGENTA_EX + """
+        ╔════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+        ║              .__                                   ___.    .__ .__   .__     __   .__                  ║
+        ║___  __ __ __ |  |    ____    ____  _______ _____   \_ |__  |__||  |  |__|  _/  |_ |__|  ____    ______ ║
+        ║\  \/ /|  |  \|  |   /    \ _/ __ \ \_  __ \\__  \   | __ \ |  ||  |  |  |  \   __\|  |_/ __ \  /  ___/ ║
+        ║ \   / |  |  /|  |__|   |  \\  ___/  |  | \/ / __ \_ | \_\ \|  ||  |__|  |   |  |  |  |\  ___/  \___ \  ║
+        ║  \_/  |____/ |____/|___|  / \___  > |__|   (____  / |___  /|__||____/|__|   |__|  |__| \___  >/____  > ║
+        ║                         \/      \/              \/      \/                                 \/      \/  ║
+        ║                                                                                                        ║                                                                                                        ║
+        ║     __           __                     __   .__                                                       ║
+        ║  __| _/  ____  _/  |_   ____    ____  _/  |_ |__|  ____    ____                                        ║
+        ║ / __ | _/ __ \ \   __\_/ __ \ _/ ___\ \   __\|  | /  _ \  /    \                                       ║
+        ║/ /_/ | \  ___/  |  |  \  ___/ \  \___  |  |  |  |(  <_> )|   |  \                                      ║
+        ║\____ |  \___  > |__|   \___  > \___  > |__|  |__| \____/ |___|  /                                      ║
+        ║     \/      \/             \/      \/                         \/                                       ║
+        ╚════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+                                            ╔════════════════════╗
+                                            ║    VULN DETECT     ║ V1.1
+                                            ╚════════════════════╝
+          """)
     # TypeError: 'str' object is not callable
     
-    ul = input("\n [1] Scan WebSite\n[2] Scan Ip")
+    ul = input("\n [1] Scan WebSite\n[2] Scan Ip\n\nEntrer une option: ")
     if ul == '1':
-        url()
+        os.system("sqlmap")
     if ul == '2':
-        ip = input("\nVeuiller entré l'addresse Ip")
-        print(os.system('nmap -sV --script=vulscan.nse' +ip ))
+        ip = input("\nVeuiller entré l'addresse Ip: ")
+        print(os.system('nmap -sV --script=vulscan.nse' + ip ))
 
 def info():
+    if os.name == 'nt':  # Pour Windows
+        os.system('cls')
+
+    else :  # Pour Linux/Mac
+        os.system('clear')
     print('''
 name_tool = "Azoth"
 version_tool = "1.5"
@@ -153,8 +188,8 @@ github_tool = "soon.."
 license = "https://github.com/loxyteck/RedTiger-Tools/blob/main/LICENSE"
 copyright = "Copyright (c) Azxth 'LICENSE'"
           ''')
-    timeout=5
-    print(tool_menu)
+    time.out(13)
+    tool_menu()
 
 
     # Création ou connexion à la base de données SQLite
@@ -168,60 +203,10 @@ CREATE TABLE IF NOT EXISTS users (
 )
 ''')
 
-def main():
-        print("\n--- Menu Principal ---")
-        print("1. Créer un utilisateur")
-        print("2. Se connecter")
-        print("0. Quitter")
-
-        choice = input("Choisissez une option: ")
-
-        if choice == '1':
-            create_user()
-        elif choice == '2':
-            login()
-        elif choice == '0':
-            print("Au revoir!")
-            exit()
-        else:
-            print("Option invalide, veuillez réessayer.")
-
-def check_xss(url):
-    test_script = "<script>alert('XSS')</script>"
-    response = requests.get(url + test_script)
-    if test_script in response.text:
-        print(f"[VULNERABLE] XSS vulnerability detected at {url}")
-    else:
-        print(f"[SAFE] No XSS vulnerability at {url}")
-
-def check_sql_injection(url):
-    test_payload = "' OR '1'='1"
-    response = requests.get(url + test_payload)
-    if "syntax" in response.text or "SQL" in response.text:
-        print(f"[VULNERABLE] SQL Injection vulnerability detected at {url}")
-    else:
-        print(f"[SAFE] No SQL Injection vulnerability at {url}")
-
-def check_file_inclusion(url):
-    test_payload = "../../../../etc/passwd"
-    response = requests.get(url + test_payload)
-    if "root:x" in response.text:
-        print(f"[VULNERABLE] File Inclusion vulnerability detected at {url}")
-    else:
-        print(f"[SAFE] No File Inclusion vulnerability at {url}")
-
-def scan_site(url):
-    print(f"Scanning {url} for vulnerabilities...")
-    check_xss(url)
-    check_sql_injection(url)
-    check_file_inclusion(url)
-
-def url():
-    target_url = input("Enter the URL of the site to scan: ")
-    scan_site(target_url)
-
 if __name__ == "__main__":
-    main()
+    menu_principale()
+
 
 # Fermeture de la connexion à la base de données
 conn.close()
+
