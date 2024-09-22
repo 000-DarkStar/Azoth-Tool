@@ -53,5 +53,5 @@ Azoth has been developed solely for educational purposes. This project has been 
 - <a href="https://discord.gg/soon...">Discord</a><br>
 - <a href="soon...">Website</a><br>
 - Creator: 000-DarkStar<br>
-- Version: 5.6
+- Version: 1.5
 </p>
