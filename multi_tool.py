@@ -10,21 +10,21 @@ import requests
 from bs4 import BeautifulSoup
 import nmap
 
-# Création ou connexion à la base de données SQLite
+# On cree la base de donner avec SQLITE
 conn = sqlite3.connect('users.db')
 c = conn.cursor()
 
 
 sc = nmap.PortScanner
 
-# Création de la table des utilisateurs si elle n'existe pas
+# On cree la table des utilisateur si elle existe pas
 c.execute('''
 CREATE TABLE IF NOT EXISTS users (
     username TEXT PRIMARY KEY
 )
 ''')
 
-# Fonction pour ajouter un nouvel utilisateur
+# Fonction pour add un nouvel utilisateur
 def create_user():
     username = input("Veuillez entrer un nom d'utilisateur: ")
     try:
@@ -192,11 +192,11 @@ copyright = "Copyright (c) Azxth 'LICENSE'"
     tool_menu()
 
 
-    # Création ou connexion à la base de données SQLite
+    # On cree la base de donner avec SQLITE
 conn = sqlite3.connect('users.db')
 c = conn.cursor()
 
-# Création de la table des utilisateurs si elle n'existe pas
+# On cree la table des utilisateur si elle existe pas
 c.execute('''
 CREATE TABLE IF NOT EXISTS users (
     username TEXT PRIMARY KEY
