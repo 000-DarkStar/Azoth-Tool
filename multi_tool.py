@@ -15,7 +15,7 @@ conn = sqlite3.connect('users.db')
 c = conn.cursor()
 
 
-sc = nmap.PortScanner
+sc = nmap.PortScanner()
 
 # On cree la table des utilisateur si elle existe pas
 c.execute('''
